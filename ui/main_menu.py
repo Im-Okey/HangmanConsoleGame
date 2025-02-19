@@ -2,7 +2,7 @@ from ui.base_menu import BaseMenu
 from ui.settings_menu import SettingsMenu
 from ui.game_screen import GameScreen
 from core.settings import GameSettings
-from core.game import GameStatistics
+from core.statistics import GameStatistics
 from ui.statistics_menu import StatisticsMenu
 
 
@@ -19,7 +19,7 @@ class MainMenu(BaseMenu):
             choice = self.navigate()
 
             if choice == 0:
-                game = GameScreen(self.stdscr, self.settings.difficulty)
+                game = GameScreen(self.stdscr, self.settings.difficulty, self.stats)
                 game.run()
             elif choice == 1:
                 settings_menu = SettingsMenu(self.stdscr, self.settings)

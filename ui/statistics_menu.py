@@ -26,13 +26,13 @@ class StatisticsMenu(BaseMenu):
 
         self.stdscr.clear()
         self.stdscr.addstr(2, 2, f"Общее количество игр: {stats['total']}")
-        self.stdscr.addstr(3, 2, f"Выиграно игр: {stats['won']}")
+        self.stdscr.addstr(3, 2, f"Выйграно игр: {stats['won']}")
         self.stdscr.addstr(4, 2, f"Проиграно игр: {stats['lost']}")
         self.stdscr.addstr(5, 2, "Статистика по уровням сложности:")
 
         row = 6
         for difficulty, data in stats['difficulty'].items():
-            self.stdscr.addstr(row, 2, f"{difficulty}: {data['won']} выиграно, {data['lost']} проиграно")
+            self.stdscr.addstr(row, 2, f"{difficulty}: {data['won']} выйграно, {data['lost']} проиграно")
             row += 1
 
         self.stdscr.refresh()

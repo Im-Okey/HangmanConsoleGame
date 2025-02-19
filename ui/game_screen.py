@@ -4,10 +4,11 @@ from core.game import HangmanGame
 
 class GameScreen:
     """Экран игры"""
-    def __init__(self, stdscr, difficulty):
+    def __init__(self, stdscr, difficulty, stats):
         self.stdscr = stdscr
         self.game = HangmanGame(difficulty)
         self.start_attempts = self.game.attempts
+        self.stats = stats
 
     def run(self):
         """ИГРА"""
@@ -31,6 +32,7 @@ class GameScreen:
             self.game.guess_letter(letter.upper())
 
         self.show_result()
+        self.update_statistics()
 
     def show_result(self):
         """Отображение результатов игры"""
@@ -42,3 +44,7 @@ class GameScreen:
             self.stdscr.addstr(2, 2, f"Вы проиграли! Загаданное слово: {self.game.word}")
         self.stdscr.refresh()
         self.stdscr.getch()
+
+    def update_statistics(self):
+        """Обновление статистики"""
+        self.stats.update_stats(self.game)
