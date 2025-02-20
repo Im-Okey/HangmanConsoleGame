@@ -1,7 +1,7 @@
 import json, os, random
 from typing import IO
 
-from core.game_difficulty import GameSettings
+from core.game_settings import GameSettings
 
 
 class WordsManager:

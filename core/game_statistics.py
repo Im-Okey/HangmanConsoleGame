@@ -1,6 +1,6 @@
 from core.backends import StatsManager
 from core.game import HangmanGame
-from core.game_difficulty import GameSettings
+from core.game_settings import GameSettings
 
 
 class GameStatistics:

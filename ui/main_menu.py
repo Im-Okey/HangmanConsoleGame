@@ -1,7 +1,7 @@
 from ui.base_menu import BaseMenu
-from ui.difficulty_menu import SettingsMenu
+from ui.settings_menu import SettingsMenu
 from ui.game_screen import GameScreen
-from core.game_difficulty import GameSettings
+from core.game_settings import GameSettings
 from core.game_statistics import GameStatistics
 from ui.statistics_menu import StatisticsMenu
 
