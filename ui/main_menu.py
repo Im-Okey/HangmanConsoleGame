@@ -7,14 +7,14 @@ from ui.statistics_menu import StatisticsMenu
 
 
 class MainMenu(BaseMenu):
-    """Главное меню"""
+    """Represents the main menu"""
     def __init__(self, stdscr):
-        super().__init__(stdscr, ["Начать игру", "Настройки", "Статистика", "Выйти"])
+        super().__init__(stdscr, ["Start new game", "Settings", "Statistics", "Exit"])
         self.settings = GameSettings()
         self.stats = GameStatistics()
 
-    def run(self):
-        """Запуск главного меню"""
+    def execute(self):
+        """Executes the main menu"""
         while True:
             choice = self.navigate()
 
@@ -23,9 +23,9 @@ class MainMenu(BaseMenu):
                 game.run()
             elif choice == 1:
                 settings_menu = SettingsMenu(self.stdscr, self.settings)
-                settings_menu.run()
+                settings_menu.execute()
             elif choice == 2:
                 statistics_menu = StatisticsMenu(self.stdscr, self.stats)
-                statistics_menu.run()
+                statistics_menu.execute()
             elif choice == 3:
                 break

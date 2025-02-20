@@ -1,23 +1,18 @@
-import random
+from core.backends import WordsManager
+
 
 class HangmanGame:
-    """Логика игры"""
-    WORDS = {
-        "Легкий": ["кот"],
-        "Средний": ["машина", "компьютер", "монитор"],
-        "Трудный": ["энциклопедия", "автомобилист", "гиперпространство"],
-        "Эксперт": ["псевдокодификация", "дифференцирование", "электропроводность"]
-    }
+    """Represents the game logic"""
 
-    def __init__(self, difficulty="Легкий"):
+    def __init__(self, difficulty="Easy"):
         self.difficulty = difficulty
-        self.word = random.choice(self.WORDS[difficulty]).upper()
+        self.word = WordsManager(difficulty).load_word(difficulty)
         self.hidden_word = ["_"] * len(self.word)
         self.attempts = 6
         self.guessed_letters = set()
 
     def guess_letter(self, letter):
-        """Обрабатка попытку угадать букву"""
+        """Handles user input"""
         if letter in self.guessed_letters:
             return False
 
@@ -33,9 +28,9 @@ class HangmanGame:
             return False
 
     def is_won(self):
-        """Проверка выйграл ли игрок"""
+        """Checks if the player has won"""
         return "_" not in self.hidden_word
 
     def is_lost(self):
-        """Проверка на проигрыш"""
+        """Checks if the player has lost"""
         return self.attempts <= 0

@@ -3,7 +3,7 @@ from core.game import HangmanGame
 
 
 class GameScreen:
-    """Экран игры"""
+    """Represent the game process screen"""
     def __init__(self, stdscr, difficulty, stats):
         self.stdscr = stdscr
         self.game = HangmanGame(difficulty)
@@ -11,14 +11,14 @@ class GameScreen:
         self.stats = stats
 
     def run(self):
-        """ИГРА"""
+        """Run the game"""
         curses.curs_set(1)
         while not (self.game.is_won() or self.game.is_lost()):
             self.stdscr.clear()
-            self.stdscr.addstr(1, 2, f"Слово: {' '.join(self.game.hidden_word)}")
-            self.stdscr.addstr(2, 2, f"Попытки: {self.game.attempts}")
-            self.stdscr.addstr(3, 2, f"Использованные буквы: {', '.join(self.game.guessed_letters)}")
-            self.stdscr.addstr(5, 2, "Введите букву: ")
+            self.stdscr.addstr(1, 2, f"Hidden word: {' '.join(self.game.hidden_word)}")
+            self.stdscr.addstr(2, 2, f"Attempts: {self.game.attempts}")
+            self.stdscr.addstr(3, 2, f"Used letters: {', '.join(self.game.guessed_letters)}")
+            self.stdscr.addstr(5, 2, "Input letter: ")
             self.stdscr.refresh()
 
             key = self.stdscr.getch()
@@ -32,19 +32,15 @@ class GameScreen:
             self.game.guess_letter(letter.upper())
 
         self.show_result()
-        self.update_statistics()
+        self.stats.update_stats(self.game)
 
     def show_result(self):
-        """Отображение результатов игры"""
+        """Display the game results"""
         self.stdscr.clear()
         if self.game.is_won():
-            self.stdscr.addstr(2, 2, f"Поздравляем! Вы выиграли 🎉")
-            self.stdscr.addstr(3, 2, f"Попыток потрачено: {self.start_attempts - self.game.attempts} из {self.start_attempts}")
+            self.stdscr.addstr(2, 2, f"Congratulations! You won! 🎉")
+            self.stdscr.addstr(3, 2, f"Attempts spent: {self.start_attempts - self.game.attempts} out of {self.start_attempts}")
         else:
-            self.stdscr.addstr(2, 2, f"Вы проиграли! Загаданное слово: {self.game.word}")
+            self.stdscr.addstr(2, 2, f"You lost! The hidden word was: {self.game.word}")
         self.stdscr.refresh()
         self.stdscr.getch()
-
-    def update_statistics(self):
-        """Обновление статистики"""
-        self.stats.update_stats(self.game)

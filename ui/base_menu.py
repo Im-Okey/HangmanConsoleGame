@@ -1,15 +1,16 @@
+import abc
 import curses
 
 
 class BaseMenu:
-    """Базовый класс для всех меню"""
+    """Сontains the general logic of operation of all menu windows"""
     def __init__(self, stdscr, options):
         self.stdscr = stdscr
         self.options = options
         self.current_row = 0
 
     def draw_menu(self):
-        """Отображение меню"""
+        """Renders the menu"""
         self.stdscr.clear()
         for i, option in enumerate(self.options):
             if i == self.current_row:
@@ -19,7 +20,7 @@ class BaseMenu:
         self.stdscr.refresh()
 
     def navigate(self):
-        """Логика перемещения курсора"""
+        """Navigates the menu"""
         while True:
             self.draw_menu()
             key = self.stdscr.getch()
