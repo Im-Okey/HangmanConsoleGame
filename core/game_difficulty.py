@@ -1,9 +1,9 @@
 class GameSettings:
-    """Настройки игры"""
+    """Represents game settings"""
     DIFFICULTY_LEVELS = ["Easy", "Medium", "Hard", "Expert"]
 
     WORDS_FILES = {
-        "Easy": "data/easy.txt",
+        "Easy": "data/easy1.txt",
         "Medium": "data/medium.txt",
         "Hard": "data/hard.txt",
         "Expert": "data/expert.txt"
@@ -13,7 +13,7 @@ class GameSettings:
         self.difficulty = "Easy"
 
     def set_difficulty(self, level):
-        """Устанановка уровеня сложности игры"""
+        """Set difficulty level"""
         if level in self.DIFFICULTY_LEVELS:
             self.difficulty = level
 

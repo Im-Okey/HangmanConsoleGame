@@ -1,7 +1,7 @@
 import json, os, random
 from typing import IO
 
-from core.settings import GameSettings
+from core.game_difficulty import GameSettings
 
 
 class WordsManager:
@@ -15,13 +15,13 @@ class WordsManager:
         """Loads a word from a file of the appropriate difficulty level"""
         file_path = GameSettings.WORDS_FILES[difficulty]
         if not os.path.exists(file_path):
-            raise FileNotFoundError(f"Файл со словами {file_path} не найден!")
+            raise FileNotFoundError(f"Words file {file_path} was not found!")
 
         with open(file_path, "r", encoding="utf-8") as file:
             words = [line.strip() for line in file if line.strip()]
 
         if not words:
-            raise ValueError(f"Файл {file_path} пуст!")
+            raise ValueError(f"File {file_path} is empty!")
 
         return random.choice(words).upper()
 
@@ -43,8 +43,11 @@ class StatsManager:
 
     def save_stats(self, data):
         """Saves game statistics"""
-        with open(self.stats.stats_file, 'w', encoding='utf-8') as file: # type: IO[str]
-            json.dump(data, file, ensure_ascii=False, indent=4)
+        try:
+            with open(self.stats.stats_file, 'w', encoding='utf-8') as file: # type: IO[str]
+                json.dump(data, file, ensure_ascii=False, indent=4)
+        except FileNotFoundError:
+            raise f"Stats file {self.stats.stats_file} was not found!"
 
 
 def check_terminal_size(stdscr):
@@ -53,9 +56,9 @@ def check_terminal_size(stdscr):
         stdscr.clear()
         max_y, max_x = stdscr.getmaxyx()
 
-        if max_y < 15 or max_x < 40:
+        if max_y < 10 or max_x < 20:
             stdscr.addstr(1, 2, "⚠ Window is too small! ⚠")
-            stdscr.addstr(3, 2, "Please resize it to at least 40x15")
+            stdscr.addstr(3, 2, "Please resize it to at least 20x10")
             stdscr.addstr(5, 2, "Try to resize it until the game starts....")
             stdscr.refresh()
             stdscr.getch()

@@ -1,15 +1,15 @@
 from ui.base_menu import BaseMenu
-from ui.settings_menu import SettingsMenu
+from ui.difficulty_menu import SettingsMenu
 from ui.game_screen import GameScreen
-from core.settings import GameSettings
-from core.statistics import GameStatistics
+from core.game_difficulty import GameSettings
+from core.game_statistics import GameStatistics
 from ui.statistics_menu import StatisticsMenu
 
 
 class MainMenu(BaseMenu):
     """Represents the main menu"""
     def __init__(self, stdscr):
-        super().__init__(stdscr, ["Start new game", "Settings", "Statistics", "Exit"])
+        super().__init__(stdscr, ["Start new game", "Difficulty", "Statistics", "Exit"])
         self.settings = GameSettings()
         self.stats = GameStatistics()
 
