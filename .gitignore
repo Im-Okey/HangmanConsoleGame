@@ -1,2 +1,4 @@
 .venv
 stats.json
+.idea
+__pycache__

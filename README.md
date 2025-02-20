@@ -101,7 +101,7 @@ Letter keys (A-Z) - Guess a letter during the game
 ---
 
 
-### 🎩 Приятной игры в "Виселицу"! 🕵️‍♂️
+### 🎩 Have a nice 'Hangman' game! 🕵️‍♂️
 
 
 ---
