@@ -3,7 +3,7 @@ class GameSettings:
     DIFFICULTY_LEVELS = ["Easy", "Medium", "Hard", "Expert"]
 
     WORDS_FILES = {
-        "Easy": "data/easy1.txt",
+        "Easy": "data/easy.txt",
         "Medium": "data/medium.txt",
         "Hard": "data/hard.txt",
         "Expert": "data/expert.txt"
